@@ -75,13 +75,13 @@ class Cost(models.Model):
 
 
 class TrainingData(models.Model):
-    completed_project_duration = models.IntegerField(null=True)
-    spi = models.IntegerField(null=True)
-    cpi = models.IntegerField(null=True)
-    developer_experience = models.IntegerField(null=True)
-    task_completion = models.IntegerField(null=True)
-    test_cases_passed = models.IntegerField(null=True)
-    sprint_condition = models.IntegerField(null=True)
+    completed_project_duration = models.DecimalField(decimal_places=4, max_digits=7, null=True,)
+    spi = models.DecimalField(decimal_places=4, max_digits=6, null=True)
+    cpi = models.DecimalField(decimal_places=4, max_digits=6, null=True)
+    developer_experience = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    task_completion = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    test_cases_passed = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    sprint_condition = models.DecimalField(decimal_places=4, max_digits=5, null=True)
 
     def __unicode__(self):
         return unicode(self.id)

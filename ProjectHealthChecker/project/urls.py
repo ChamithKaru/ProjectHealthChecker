@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^(?P<milestone_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^grid/$', views.grid, name='grid'),
     url(r'^imageTest/$', views.imageTest, name='imageTest'),
+    url(r'^form/$', views.form, name='form'),
 ]

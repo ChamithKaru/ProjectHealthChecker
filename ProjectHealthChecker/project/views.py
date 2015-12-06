@@ -16,7 +16,7 @@ def detail(request, sprint_id):
 
 
 def index(request):
-    project_list = Project.objects.order_by('-id')
+    project_list = Project.objects.order_by('id')
     amount = len(project_list)
     context = {'project_amount': amount,
                'project_list': project_list}
@@ -27,6 +27,10 @@ def index(request):
 
 def grid(request):
     return render(request, 'project/ui-kits/grid.html')
+
+
+def form(request):
+    return render(request, 'project/ui-kits/form.html')
 
 
 @ensure_csrf_cookie
