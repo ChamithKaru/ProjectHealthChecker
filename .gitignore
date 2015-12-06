@@ -60,3 +60,4 @@ target/
 
 ProjectHealthChecker/static/
 ProjectHealthChecker/project/som/
+test.py
