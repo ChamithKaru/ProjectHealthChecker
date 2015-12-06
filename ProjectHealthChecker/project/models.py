@@ -30,7 +30,9 @@ class Task(models.Model):
     task_priority = models.IntegerField(default=1)
     task_start_date = models.DateTimeField('task_start_date')
     task_end_date = models.DateTimeField('task_end_date')
-    task_status = models.CharField(max_length=50,default='pending')
+    task_scheduled_hours = models.IntegerField(null=True)
+    task_actual_hours = models.IntegerField(null=True)
+    task_status = models.CharField(max_length=50, default='pending')
 
     def __unicode__(self):
         return self.task_name
