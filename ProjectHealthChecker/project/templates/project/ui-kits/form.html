@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 
@@ -8,17 +10,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/animate.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/iCheck/skins/flat/_all.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/DataTables/media/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="../../vendor/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/bootstrap/dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/animate_css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/iCheck/skins/flat/_all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/DataTables/media/css/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/bower_components/select2/dist/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/vendor/css/dataTables.bootstrap.css' %}">
     <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../css/themes.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/bootstrap/css/themes.css' %}">
 </head>
 
 <body class="flat-blue">
@@ -89,7 +91,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
                             <ul class="dropdown-menu animated fadeInDown">
                                 <li class="profile-img">
-                                    <img src="../../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                    <img src="{% static 'project/bootstrap/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                                 </li>
                                 <li>
                                     <div class="profile-info">
@@ -264,29 +266,29 @@
                                     <form class="form-inline"  >
                                         <div class="form-group" style="margin-bottom:">
                                             <label for="exampleInputName2" style="width:50%">Project Completion</label>
-                                            <input type="text" class="form-control" name="Project_Completion" id="exampleInputName2" placeholder="">
+                                            <input type="text" class="form-control" name="Project_Completion" id="project_completion" placeholder="{{ project_completion }}">
                                         </div><br><br>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2" style="width:50%">SPI</label>
-                                            <input type="email" class="form-control" name="spi" id="exampleInputEmail2" placeholder="">
+                                            <input type="email" class="form-control" name="spi" id="spi" placeholder="{{ spi }}">
                                         </div><br><br>
                                         <div class="form-group">
                                             <label for="exampleInputName2" style="width:50%">CPI</label>
-                                            <input type="text" class="form-control" name="cpi" id="exampleInputName2" placeholder="">
+                                            <input type="text" class="form-control" name="cpi" id="cpi" placeholder="{{ cpi }}">
                                         </div><br><br>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"style="width:50%">Developer experience</label>
-                                            <input type="email" class="form-control" name="Developer_experience" id="exampleInputEmail2" placeholder="">
+                                            <input type="email" class="form-control" name="Developer_experience" id="developer_experience" placeholder="{{ developer_experience }}">
                                         </div><br><br>
                                         <div class="form-group">
                                             <label for="exampleInputName2"style="width:50%">Test Case Completion</label>
-                                            <input type="text" class="form-control" name="Test_Case_Completion" id="exampleInputName2" placeholder="">
+                                            <input type="text" class="form-control" name="Test_Case_Completion" id="test_cases_passed" placeholder="{{ test_cases_passed }}">
                                         </div><br><br>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"style="width:50%">Task Completion</label>
-                                            <input type="email" class="form-control" name="Task_Completion" id="exampleInputEmail2" placeholder="">
+                                            <input type="email" class="form-control" name="Task_Completion" id="task_completion" placeholder="{{ task_completion }}">
                                         </div><br><br>
-                                        <button type="submit" class="btn btn-default">Evaluate Project Condition</button>
+                                        <button id="evaluateBtn" type="button" class="btn btn-default">Evaluate Project Condition</button>
                                     </form>
                                 </div>
                             </div>
@@ -300,20 +302,26 @@
         </footer>
         <div>
             <!-- Javascript Libs -->
-            <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/chartjs/Chart.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/iCheck/icheck.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/matchHeight/jquery.matchHeight-min.js"></script>
-            <script type="text/javascript" src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="../../bower_components/select2/dist/js/select2.full.min.js"></script>
-            <script type="text/javascript" src="../../vendor/js/dataTables.bootstrap.js"></script>
-            <script type="text/javascript" src="../../vendor/js/ace/ace.js"></script>
-            <script type="text/javascript" src="../../vendor/js/ace/mode-html.js"></script>
-            <script type="text/javascript" src="../../vendor/js/ace/theme-github.js"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/jquery/dist/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/chartjs/Chart.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/iCheck/icheck.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/matchHeight/jquery.matchHeight-min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/DataTables/media/js/jquery.dataTables.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/bower_components/select2/dist/js/select2.full.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/vendor/js/dataTables.bootstrap.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/vendor/js/ace/ace.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/vendor/js/ace/mode-html.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/vendor/js/ace/theme-github.js' %}"></script>
             <!-- Javascript -->
-            <script type="text/javascript" src="../../js/app.js"></script>
+            <script type="text/javascript" src="{% static 'project/bootstrap/js/app.js' %}"></script>
+            <script type="text/javascript" src="{% static 'project/project.js' %}"></script>
+        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

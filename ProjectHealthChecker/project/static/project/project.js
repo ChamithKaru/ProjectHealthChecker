@@ -46,3 +46,43 @@ $( "#imageTestBtn" ).click(function() {
         }
     });
 });
+
+$( "#evaluateBtn" ).click(function() {
+  //alert( "Handler for .click() called." );
+  var csrftoken = getCookie('csrftoken');
+  projectCompletion = $( "#project_completion" ).val();
+  spi = $( "#spi" ).val();
+  cpi = $( "#cpi" ).val();
+  developer_experience = $( "#developer_experience" ).val();
+  task_completion = $( "#task_completion" ).val();
+  test_cases_passed = $( "#test_cases_passed" ).val();
+  $.ajax({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        async: false,
+        url: '/project/form/',
+        method: 'POST', // or another (GET), whatever you need
+        data: {
+            click: 'True',
+            pr_cmp: projectCompletion,
+            spi: spi,
+            cpi: cpi,
+            dev_exp: developer_experience,
+            test_cases: test_cases_passed,
+            task_cmplt: task_completion
+        },
+        dataType: "json",
+        success: function (data) {
+            alert(data.status);
+//            $( "#imageTestDisplay" ).empty();
+//            if(data.status == 'success'){
+//                $("#imageTestDisplay").append("<img src=\"/static/project/final.png\" class=\"img-responsive\">");
+//            }else{
+//                alert('Request Failed');
+//            }
+        }
+    });
+});

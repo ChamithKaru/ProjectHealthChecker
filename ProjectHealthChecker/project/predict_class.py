@@ -14,7 +14,7 @@ from numpy import array
 
 
 class predictor():
-    def makePrediction(self):
+    def makePrediction(self,project_completion, spi, cpi, developer_experience, test_cases_passed, task_completion):
 
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         #print Data
@@ -37,14 +37,15 @@ class predictor():
         clf = GaussianNB()
         model=clf.fit(X, Y)
         #result=clf.predict([[80,0.905,0.9915,0.9,0.9844,0.99]])
-
-        result=clf.predict([[40,0.8312,0.9118,0.4,0.8424,0.7800]])
+        #result=clf.predict([[40,0.8312,0.9118,0.4,0.8424,0.7800]])
+        result = clf.predict([[float(project_completion), float(spi), float(cpi), float(developer_experience), float(test_cases_passed), float(task_completion)]])
         if result == 0:
-             final_condition="Failed"
+             final_condition="failed"
         else:
-             final_condition="Success"
+             final_condition="success"
         print final_condition
+        return final_condition
 
 
-p = predictor()
-p.makePrediction()
+# p = predictor()
+# p.makePrediction()
