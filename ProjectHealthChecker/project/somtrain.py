@@ -6,7 +6,7 @@ from numpy import genfromtxt
 
 from project import sompy as SOM
 
-class CsvData():
+class somtrain():
 
     def path(self):
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,9 +20,12 @@ class CsvData():
         :rtype : object
         """
         # print paths
+        print 'inside'
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        print 'Base: ' + BASE_DIR
         try:
             # pollution data
-            Data = genfromtxt(open('whitewines.csv', 'r'), dtype=float, delimiter=',')[1:]
+            Data = genfromtxt(open(os.path.join(BASE_DIR, "data_new.csv"), 'r'), dtype=float, delimiter=',')[1:]
             # Labels = Data[:, ]
             Data = Data[:, :11]
             # header = genfromtxt(open('whitewines.csv', 'r'), delimiter=',', dtype=None)[0]
@@ -51,11 +54,14 @@ class CsvData():
             # sm.view_map(what='codebook', which_dim='all', pack='Yes', text_size=2.8, save='Yes', save_dir='sompy')
             # sm.view_map(which_dim='all', pack='Yes', text_size=6, save='Yes', save_dir='after_train')
             #
-            # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            # path = os.path.join(BASE_DIR, "static/project/final")
-            # print path
+
+            path = os.path.join(BASE_DIR, "static/project/final")
+            filePath = os.path.join(BASE_DIR, "static/project/final.png")
+            print path
+            if os.path.isfile(filePath):
+                os.remove(filePath)
             a = sm.view_U_matrix(dlen, distance2=1, row_normalized='No', show_data='Yes', contooor='Yes', blob='No', save='Yes',
-                                 save_dir='final')
+                                 save_dir=path)
 
             # sm.hit_map()
             # sm.project_data(Data)
@@ -66,10 +72,14 @@ class CsvData():
             print "Unexpected Error:", sys.exc_info()
             return False
         else:
+            while not os.path.isfile(filePath):
+                if os.path.isfile(filePath):
+                    return True
+
             return True
 
-c = CsvData()
-#c.path()
-c.genreatesom()
+# c = somtrain()
+# #c.path()
+# c.genreatesom()
 
 

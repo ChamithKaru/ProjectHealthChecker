@@ -28,6 +28,7 @@ $( "#imageTestBtn" ).click(function() {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
         },
+        async: false,
         url: '/project/imageTest/',
         method: 'POST', // or another (GET), whatever you need
         data: {

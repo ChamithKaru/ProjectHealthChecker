@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import Project
-from .csv_data import CsvData
+from project.somtrain import somtrain
 
 
 # Create your views here.
@@ -33,8 +33,9 @@ def grid(request):
 def imageTest(request):
     if request.POST.get('click', False):
         data = {}
-        c = CsvData
+        c = somtrain
         # c.genreatesom()
+        print 'before if'
         if c.genreatesom():
             data['status'] = 'success'
         else:

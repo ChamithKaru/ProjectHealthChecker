@@ -1,3 +1,4 @@
+from __builtin__ import unicode
 from django.db import models
 
 # Create your models here.
@@ -64,8 +65,21 @@ class Assignment(models.Model):
 class Cost(models.Model):
     project = models.ForeignKey(Project)
     sprint = models.ForeignKey(Sprint)
-    scheduled_cost = models.DecimalField
-    actual_cost = models.DecimalField
+    scheduled_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    actual_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
     def __unicode__(self):
         return self.id
+
+
+class TrainingData(models.Model):
+    completed_project_duration = models.IntegerField(null=True)
+    spi = models.IntegerField(null=True)
+    cpi = models.IntegerField(null=True)
+    developer_experience = models.IntegerField(null=True)
+    task_completion = models.IntegerField(null=True)
+    test_cases_passed = models.IntegerField(null=True)
+    sprint_condition = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return unicode(self.id)
