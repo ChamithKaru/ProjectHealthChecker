@@ -9,6 +9,11 @@ import os
 from project.models import TrainingData
 from django.conf import settings
 from mvpa2.suite import *
+from matplotlib import pylab
+from pylab import *
+import PIL
+import PIL.Image
+import StringIO
 
 
 class somtrainmvpa():
@@ -104,6 +109,7 @@ class somtrainmvpa():
         #to show the figure
         print (time.time()-start_time)
         pl.show()
+        #pl.savefig()
 
 if __name__ == '__main__':
     print "Starting Rango population script..."

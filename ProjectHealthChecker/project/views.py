@@ -86,20 +86,20 @@ def form(request):
 
 @ensure_csrf_cookie
 def imageTest(request):
-    if request.POST.get('click', False):
-        data = {}
-        c = somtrain
-        # c.genreatesom()
-        print 'before if'
-        if c.genreatesom():
-            data['status'] = 'success'
-        else:
-            data['status'] = 'fail'
-        # randNumber = randint(0, 9)
-        # if randNumber % 2 == 0:
-        #     data['status'] = 'success'
-        # else:
-        #     data['status'] = 'fail'
-        return HttpResponse(json.dumps(data), content_type="application/json")
+    #if request.POST.get('click', False):
+    data = {}
+    c = somtrain
+    # c.genreatesom()
+    print 'before if'
+    if c.genreatesom():
+        data['status'] = 'success'
     else:
-        return render(request, 'project/imageTest.html')
+        data['status'] = 'fail'
+    # randNumber = randint(0, 9)
+    # if randNumber % 2 == 0:
+    #     data['status'] = 'success'
+    # else:
+    #     data['status'] = 'fail'
+    #return HttpResponse(json.dumps(data), content_type="application/json")
+    #else:
+    return render(request, 'project/imageTest.html')

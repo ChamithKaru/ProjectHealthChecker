@@ -5,6 +5,8 @@ import os
 from numpy import genfromtxt
 
 from project import sompy as SOM
+from project.models import TrainingData
+from numpy import array
 
 class somtrain():
 
@@ -24,6 +26,13 @@ class somtrain():
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         print 'Base: ' + BASE_DIR
         try:
+            # Data = []
+            # DataStr = ''
+            # data = TrainingData.objects.all()
+            # for obj in data:
+            #     row = [float(obj.completed_project_duration), float(obj.spi), float(obj.cpi), float(obj.developer_experience), float(obj.test_cases_passed), float(obj.task_completion), float(obj.sprint_condition)]
+            #     Data.append(row)
+            # Data = array(Data)
             # pollution data
             Data = genfromtxt(open(os.path.join(BASE_DIR, "data_new.csv"), 'r'), dtype=float, delimiter=',')[1:]
             # Labels = Data[:, ]
@@ -55,8 +64,8 @@ class somtrain():
             # sm.view_map(which_dim='all', pack='Yes', text_size=6, save='Yes', save_dir='after_train')
             #
 
-            path = os.path.join(BASE_DIR, "static/project/final")
-            filePath = os.path.join(BASE_DIR, "static/project/final.png")
+            path = os.path.join(os.path.dirname(BASE_DIR), "media/project/final")
+            filePath = os.path.join(os.path.dirname(BASE_DIR), "media/project/final.png")
             print path
             if os.path.isfile(filePath):
                 os.remove(filePath)
