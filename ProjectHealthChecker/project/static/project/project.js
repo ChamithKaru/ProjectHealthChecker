@@ -92,3 +92,46 @@ $( "#evaluateBtn" ).click(function() {
         }
     });
 });
+
+$( "#submitInputBtn" ).click(function() {
+  //alert( "Handler for .click() called." );
+  var csrftoken = getCookie('csrftoken');
+  projectId = $( "#projectList" ).find(":selected").val();
+  projectCompletion = $( "#project_completion" ).val();
+  spi = $( "#spi" ).val();
+  cpi = $( "#cpi" ).val();
+  developer_experience = $( "#developer_experience" ).val();
+  task_completion = $( "#task_completion" ).val();
+  test_cases_passed = $( "#test_cases_passed" ).val();
+  $.ajax({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        async: false,
+        url: '/project/current_input/',
+        method: 'POST', // or another (GET), whatever you need
+        data: {
+            click: 'True',
+            pr_id: projectId,
+            pr_cmp: projectCompletion,
+            spi: spi,
+            cpi: cpi,
+            dev_exp: developer_experience,
+            test_cases: test_cases_passed,
+            task_cmplt: task_completion
+        },
+        dataType: "json",
+        success: function (data) {
+            alert(data.status +"!! Press Ok to load SOM Visualization");
+            //$( "#imageTestDisplay" ).empty();
+            window.location = "/project/imageTest/";
+//            if(data.status == 'success'){
+//                window.location = "/project/imageTest/";
+//            }else{
+//                alert('Request Failed');
+//            }
+        }
+    });
+});

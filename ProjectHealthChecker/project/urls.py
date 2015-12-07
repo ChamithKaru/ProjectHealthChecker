@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^grid/$', views.grid, name='grid'),
     url(r'^imageTest/$', views.imageTest, name='imageTest'),
     url(r'^form/$', views.form, name='form'),
+    url(r'^current_input/$', views.current_input, name='current_input'),
 ]

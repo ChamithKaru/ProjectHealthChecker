@@ -10,12 +10,16 @@ from numpy import array
 
 class somtrain():
 
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    print 'Base: ' + BASE_DIR
+
     def path(self):
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         print BASE_DIR
 
     @staticmethod
-    def genreatesom():
+    def generatesom():
 
         """
 
@@ -23,18 +27,16 @@ class somtrain():
         """
         # print paths
         print 'inside'
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        print 'Base: ' + BASE_DIR
         try:
-            # Data = []
-            # DataStr = ''
-            # data = TrainingData.objects.all()
-            # for obj in data:
-            #     row = [float(obj.completed_project_duration), float(obj.spi), float(obj.cpi), float(obj.developer_experience), float(obj.test_cases_passed), float(obj.task_completion), float(obj.sprint_condition)]
-            #     Data.append(row)
-            # Data = array(Data)
+            Data = []
+            DataStr = ''
+            data = TrainingData.objects.all()
+            for obj in data:
+                row = [float(obj.completed_project_duration), float(obj.spi), float(obj.cpi), float(obj.developer_experience), float(obj.test_cases_passed), float(obj.task_completion), float(obj.sprint_condition)]
+                Data.append(row)
+            Data = array(Data)
             # pollution data
-            Data = genfromtxt(open(os.path.join(BASE_DIR, "data_new.csv"), 'r'), dtype=float, delimiter=',')[1:]
+            # Data = genfromtxt(open(os.path.join(BASE_DIR, "data_new.csv"), 'r'), dtype=float, delimiter=',')[1:]
             # Labels = Data[:, ]
             Data = Data[:, :11]
             # header = genfromtxt(open('whitewines.csv', 'r'), delimiter=',', dtype=None)[0]
@@ -87,8 +89,57 @@ class somtrain():
 
             return True
 
-# c = somtrain()
+
+    def generateParameterwise(self, parameter):
+
+
+        try:
+            # Data = genfromtxt(open('train.csv', 'r'), dtype=float, delimiter=',')[1:]
+            Data = []
+            data = TrainingData.objects.all()
+            for obj in data:
+                row = [float(obj.completed_project_duration), float(obj.spi), float(obj.cpi), float(obj.developer_experience), float(obj.test_cases_passed), float(obj.task_completion), float(obj.sprint_condition)]
+                Data.append(row)
+            Data = array(Data)
+            Labels = Data[:, 0]
+            para = {'project_completion': 0,
+                    'spi': 1,
+                    'cpi': 2,
+                    'developer_experience': 3,
+                    'test_cases_passed': 4,
+                    'task_completion': 5, }
+            Data = Data[:, [para[parameter], 6]]
+            # print Labels
+            print Data
+            # print Data.shape[0]
+            # print Data.shape[1]
+
+            msz0 = 30
+            msz1 = 20
+            # #
+            dlen = Data.shape[0]
+            sm = SOM.SOM('sm', Data, mapsize=[msz0, msz1], norm_method='var', initmethod='pca')
+            sm.init_map()
+            sm.train(n_job=1, shared_memory='no', verbose='final')
+            # sm.view_map(what='codebook', which_dim='all', pack='Yes', text_size=2.8, save='Yes', save_dir='parameter_map')
+            # sm.view_map(which_dim='all', pack='Yes', text_size=6, save='Yes', save_dir='after_train')
+            #
+            path = os.path.join(os.path.dirname(BASE_DIR), "media/project/final")
+            filePath = os.path.join(os.path.dirname(BASE_DIR), "media/project/final.png")
+            a = sm.view_U_matrix(dlen, distance2=1, row_normalized='No', show_data='Yes', contooor='Yes', blob='No', save='Yes',
+                                 save_dir=path)
+        except:
+            print "Unexpected Error:", sys.exc_info()
+            return False
+        else:
+            while not os.path.isfile(filePath):
+                if os.path.isfile(filePath):
+                    return True
+
+            return True
+
+c = somtrain()
 # #c.path()
-# c.genreatesom()
+c.generateParameterwise('spi')
 
 

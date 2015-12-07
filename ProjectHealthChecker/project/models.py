@@ -8,6 +8,7 @@ class Project(models.Model):
     project_name = models.CharField(max_length=200)
     project_start_date = models.DateTimeField('project_start_date')
     project_end_date = models.DateTimeField('project_end_date')
+    project_status = models.CharField(max_length=50, default='pending')
 
     def __unicode__(self):
         return self.project_name
@@ -81,7 +82,23 @@ class TrainingData(models.Model):
     developer_experience = models.DecimalField(decimal_places=4, max_digits=5, null=True)
     task_completion = models.DecimalField(decimal_places=4, max_digits=5, null=True)
     test_cases_passed = models.DecimalField(decimal_places=4, max_digits=5, null=True)
-    sprint_condition = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    sprint_condition = models.CharField(max_length=50, default='pending')
+
+    def __unicode__(self):
+        return unicode(self.id)
+
+
+class CurrentData(models.Model):
+    sprint = models.ForeignKey(Sprint)
+    project = models.ForeignKey(Project)
+    completed_project_duration = models.DecimalField(decimal_places=4, max_digits=7, null=True,)
+    spi = models.DecimalField(decimal_places=4, max_digits=6, null=True)
+    cpi = models.DecimalField(decimal_places=4, max_digits=6, null=True)
+    developer_experience = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    task_completion = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    test_cases_passed = models.DecimalField(decimal_places=4, max_digits=5, null=True)
+    sprint_condition = models.CharField(max_length=50, default='pending')
+    date = models.TimeField(auto_now_add=True)
 
     def __unicode__(self):
         return unicode(self.id)
